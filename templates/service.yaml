@@ -5,11 +5,12 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
-  type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  - port: 80
+    protocol: TCP
+    targetPort: {{ .Values.service.port }}
+    name: api
   selector:
     app: {{ .Release.Name }}
+  type: LoadBalancer
+
